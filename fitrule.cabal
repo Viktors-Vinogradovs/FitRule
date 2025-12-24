@@ -1,0 +1,61 @@
+cabal-version:      3.12
+name:               fitrule
+version:            0.1.0.0
+license:            NONE
+author:             Viktors Vinogradovs
+maintainer:         viktorsvinogradovs2000@gmail.com
+build-type:         Simple
+extra-doc-files:    CHANGELOG.md
+
+common warnings
+    ghc-options: -Wall
+
+-- Library containing core logic
+library
+    import:           warnings
+    exposed-modules:
+        Domain
+        Parser
+        Validate
+        Render
+        Generator
+    
+    hs-source-dirs:   src
+    
+    build-depends:
+        base ^>=4.18.3.0,
+        text,
+        containers,
+        megaparsec,
+        random
+    
+    default-language: Haskell2010
+
+-- Main executable
+executable fitrule
+    import:           warnings
+    main-is:          Main.hs
+    hs-source-dirs:   app
+
+    build-depends:
+        base ^>=4.18.3.0,
+        text,
+        fitrule
+
+    default-language: Haskell2010
+
+-- Test suite
+test-suite fitrule-test
+    import:           warnings
+    type:             exitcode-stdio-1.0
+    main-is:          Spec.hs
+    hs-source-dirs:   test
+    
+    build-depends:
+        base ^>=4.18.3.0,
+        fitrule,
+        QuickCheck,
+        text,
+        containers
+    
+    default-language: Haskell2010
